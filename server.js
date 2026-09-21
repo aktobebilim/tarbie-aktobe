@@ -3,7 +3,6 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Дерекқорға қосылу (Railway автоматты түрде DATABASE_URL береді)
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
@@ -13,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
 
-// Кесте жасау (егер жоқ болса)
 pool.query(`
   CREATE TABLE IF NOT EXISTS materials (
     id SERIAL PRIMARY KEY,
@@ -24,7 +22,6 @@ pool.query(`
   )
 `).catch(err => console.error("DB Init Error:", err));
 
-// Басты бет
 app.get('/', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM materials ORDER BY id DESC');
@@ -35,7 +32,6 @@ app.get('/', async (req, res) => {
   }
 });
 
-// Материал қосу
 app.post('/add', async (req, res) => {
   const { title, category, link } = req.body;
   try {
