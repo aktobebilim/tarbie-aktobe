@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Ақтөбе қаласы - Тәрбие ісі әдістемелік порталы</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <div class="max-w-4xl mx-auto p-6">
+        <header class="bg-indigo-700 text-white p-6 rounded-2xl shadow-lg mb-8">
+            <h1 class="text-2xl font-bold">Ақтөбе қаласы білім беру ұйымдары</h1>
+            <p class="text-indigo-200 mt-1">Тәрбие ісі жөніндегі орынбасарларға арналған әдістемелік көмек платформасы</p>
+        </header>
+
+        <!-- Материал қосу формасы -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-indigo-900">Жаңа әдістемелік материал қосу</h2>
+            <form action="/add" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" name="title" placeholder="Материал атауы" required class="border p-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none">
+                <input type="text" name="category" placeholder="Санаты (мысалы: Жоспар, Есеп)" required class="border p-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none">
+                <input type="url" name="link" placeholder="Файл сілтемесі (Google Drive, Docs)" required class="border p-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none">
+                <button type="submit" class="md:col-span-3 bg-indigo-600 text-white py-2.5 rounded-xl font-medium hover:bg-indigo-700 transition">Материалды жүктеу</button>
+            </form>
+        </div>
+
+        <!-- Материалдар тізімі -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-semibold mb-4 text-indigo-900">Қолжетімді әдістемелік материалдар</h2>
+            <div class="space-y-3">
+                <% if (materials.length === 0) { %>
+                    <p class="text-slate-400 text-center py-4">Әзірге материалдар қосылмаған.</p>
+                <% } else { %>
+                    <% materials.forEach(item => { %>
+                        <div class="flex items-center justify-between p-4 border rounded-xl hover:bg-slate-50 transition">
+                            <div>
+                                <h3 class="font-semibold text-slate-800"><%= item.title %></h3>
+                                <span class="inline-block bg-indigo-50 text-indigo-600 text-xs px-2.5 py-1 rounded-full mt-1 font-medium"><%= item.category %></span>
+                            </div>
+                            <a href="<%= item.link %>" target="_blank" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-sm hover:bg-slate-800 transition">Ашу / Жүктеу</a>
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

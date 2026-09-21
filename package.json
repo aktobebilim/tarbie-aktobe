@@ -1,0 +1,14 @@
+{
+  "name": "tarbie-aktobe-portal",
+  "version": "1.0.0",
+  "description": "Methodological portal for deputy directors of upbringing work in Aktobe",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "pg": "^8.11.3"
+  }
+}
